@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sample web projects built by James Sunday.">
+  <title>Projects | James Sunday</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">JS</span> James Sunday</a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu">&#9776;</button>
+      <nav id="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html" class="active">Projects</a></li>
+          <li><a href="planner.html">Planner</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-head rise">
+      <p class="eyebrow">My work</p>
+      <h1>Projects I have <span class="gradient-text">built</span></h1>
+      <p class="lead">Three sample projects from my first semester of web development. Each one has a working demo you can try.</p>
+    </div>
+
+    <div class="container">
+      <!-- ===== Project 1 ===== -->
+      <article class="project">
+        <a class="project-img" href="demo-expenses.html">
+          <img src="project1.jpg" alt="Screenshot of the SpendWise expense tracker">
+        </a>
+        <div>
+          <p class="eyebrow">Project 01</p>
+          <h2>SpendWise Expense Tracker</h2>
+          <p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></p>
+          <p>A simple tool that helps a student see where their money goes. You add an expense with a name, category and amount, and the page keeps a running total and a breakdown by category.</p>
+          <ul class="styled">
+            <li>Add and delete expenses</li>
+            <li>Running total and category totals</li>
+            <li>Built with arrays and loops</li>
+          </ul>
+          <p class="project-links">
+            <a href="demo-expenses.html">Live demo</a>
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </div>
+      </article>
+
+      <!-- ===== Project 2 ===== -->
+      <article class="project reverse">
+        <a class="project-img" href="demo-quiz.html">
+          <img src="project2.jpg" alt="Screenshot of the Web Basics Quiz">
+        </a>
+        <div>
+          <p class="eyebrow">Project 02</p>
+          <h2>Web Basics Quiz</h2>
+          <p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></p>
+          <p>A short multiple-choice quiz about HTML, CSS and JavaScript. It checks each answer straight away, keeps your score and shows a final result at the end.</p>
+          <ul class="styled">
+            <li>Questions stored in an array of objects</li>
+            <li>Instant feedback on every answer</li>
+            <li>Final score and a restart button</li>
+          </ul>
+          <p class="project-links">
+            <a href="demo-quiz.html">Live demo</a>
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </div>
+      </article>
+
+      <!-- ===== Project 3 ===== -->
+      <article class="project">
+        <a class="project-img" href="demo-events.html">
+          <img src="project3.jpg" alt="Screenshot of the Campus Events page">
+        </a>
+        <div>
+          <p class="eyebrow">Project 03</p>
+          <h2>Campus Events Board</h2>
+          <p><span class="tag">HTML</span><span class="tag">CSS Grid</span><span class="tag">JavaScript</span></p>
+          <p>A page that lists study sessions, workshops and social events. Visitors can filter by category and save the events they want to attend.</p>
+          <ul class="styled">
+            <li>Filter buttons for each category</li>
+            <li>Save and unsave events with a counter</li>
+            <li>Responsive grid layout</li>
+          </ul>
+          <p class="project-links">
+            <a href="demo-events.html">Live demo</a>
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <!-- ===== Summary ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">At a glance</p>
+        <h2>Project summary</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Project</th><th scope="col">Technologies</th><th scope="col">What it practises</th><th scope="col">Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>SpendWise</td><td>HTML, CSS, JavaScript</td><td>Arrays, loops, DOM updates</td><td>Completed</td></tr>
+              <tr><td>Web Basics Quiz</td><td>HTML, CSS, JavaScript</td><td>Objects, events, scoring</td><td>Completed</td></tr>
+              <tr><td>Campus Events</td><td>HTML, CSS Grid, JavaScript</td><td>Filtering, toggling state</td><td>Completed</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Lessons ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Reflection</p>
+        <h2>What these projects taught me</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Plan before coding</h3>
+            <p>Sketching the page and listing the features first saved me a lot of rewriting.</p>
+          </div>
+          <div class="card">
+            <h3>Test small pieces</h3>
+            <p>Checking each button as I built it made bugs much easier to find.</p>
+          </div>
+          <div class="card">
+            <h3>Keep code readable</h3>
+            <p>Clear names and short comments help me understand my own code days later.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="cta">
+        <h2>Have an idea for a project?</h2>
+        <p>I am always happy to talk about what could be built next.</p>
+        <a class="btn" href="contact.html">Contact me</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>James Sunday</h3>
+        <p>Student portfolio built for COS 106 at MIVA Open University.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="planner.html">Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:j.adewole0437@miva.edu.ng">j.adewole0437@miva.edu.ng</a>
+      </div>
+    </div>
+    <div class="copyright"><p>&copy; <span id="year">2026</span> James Sunday. COS 106 Term Project.</p></div>
+  </footer>
+
+  <audio id="ambient" loop preload="none">
+    <source src="ambient.wav" type="audio/wav">
+  </audio>
+  <button id="soundButton" class="sound-btn" type="button">Sound: Off</button>
+  <script src="script.js"></script>
+</body>
+</html>

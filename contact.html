@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact James Sunday.">
+  <title>Contact | James Sunday</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">JS</span> James Sunday</a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu">&#9776;</button>
+      <nav id="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="planner.html">Planner</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-head rise">
+      <p class="eyebrow">Contact</p>
+      <h1>Let's <span class="gradient-text">connect</span></h1>
+      <p class="lead">Have a question, an idea or an opportunity? Fill in the form or email me directly.</p>
+    </div>
+
+    <!-- ===== Details and form ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="split">
+          <div>
+            <div class="card">
+              <h3>Contact details</h3>
+              <ul class="plain">
+                <li><strong>Email:</strong> <a href="mailto:j.adewole0437@miva.edu.ng">j.adewole0437@miva.edu.ng</a></li>
+                <li><strong>School:</strong> MIVA Open University</li>
+                <li><strong>Reply time:</strong> Within 2 days</li>
+              </ul>
+            </div>
+            <div class="card" style="margin-top:20px;">
+              <h3>What you can message me about</h3>
+              <ul class="styled">
+                <li>Collaborating on a project</li>
+                <li>Study groups and revision</li>
+                <li>Feedback on this website</li>
+                <li>Internship or work opportunities</li>
+              </ul>
+            </div>
+          </div>
+
+          <form id="contactForm" novalidate>
+            <div class="form-group">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" autocomplete="name">
+              <span class="error" id="nameError"></span>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+              <span class="error" id="emailError"></span>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone number</label>
+              <input type="tel" id="phone" name="phone" placeholder="08012345678" autocomplete="tel">
+              <span class="error" id="phoneError"></span>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="Write your message here..."></textarea>
+              <span class="error" id="messageError"></span>
+            </div>
+            <button type="submit" class="btn">Send message</button>
+            <div id="formStatus" class="form-status" role="status"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">FAQ</p>
+        <h2>Common questions</h2>
+        <details>
+          <summary>How quickly will you reply?</summary>
+          <p>I usually reply within two days. During exam periods it may take a little longer.</p>
+        </details>
+        <details>
+          <summary>Can we work on a project together?</summary>
+          <p>Yes. Tell me about your idea in the message and I will let you know how I can help.</p>
+        </details>
+        <details>
+          <summary>Does this form send a real email?</summary>
+          <p>This form is a school project demo, so it checks your details but does not send email. For anything important, please use the email address above.</p>
+        </details>
+        <details>
+          <summary>Can I use the planner for my own studies?</summary>
+          <p>Of course! The planner page is free to use and saves your tasks in your own browser.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>James Sunday</h3>
+        <p>Student portfolio built for COS 106 at MIVA Open University.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="planner.html">Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:j.adewole0437@miva.edu.ng">j.adewole0437@miva.edu.ng</a>
+      </div>
+    </div>
+    <div class="copyright"><p>&copy; <span id="year">2026</span> James Sunday. COS 106 Term Project.</p></div>
+  </footer>
+
+  <audio id="ambient" loop preload="none">
+    <source src="ambient.wav" type="audio/wav">
+  </audio>
+  <button id="soundButton" class="sound-btn" type="button">Sound: Off</button>
+  <script src="script.js"></script>
+</body>
+</html>

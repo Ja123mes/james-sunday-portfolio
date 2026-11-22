@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpendWise | Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", Arial, sans-serif; background: #f3f0ff; color: #25203d; line-height: 1.5; }
+    .top { background: linear-gradient(135deg, #5b3fd6, #8b6cf0); color: #fff; padding: 16px 40px 26px; }
+    .top a { color: #fff; text-decoration: none; font-size: 14px; opacity: 0.9; }
+    .top h1 { font-size: 34px; margin-top: 6px; }
+    main { max-width: 1050px; margin: -16px auto 40px; padding: 0 24px; display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 22px; }
+    .box { background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 6px 18px rgba(60, 40, 140, 0.12); margin-bottom: 22px; }
+    h2 { font-size: 18px; margin-bottom: 12px; }
+    .total { font-size: 42px; font-weight: bold; color: #5b3fd6; }
+    form { display: grid; grid-template-columns: 2fr 1.2fr 1fr auto; gap: 10px; }
+    input, select { padding: 10px; border: 2px solid #ddd6f7; border-radius: 10px; font: inherit; width: 100%; }
+    button { background: #5b3fd6; color: #fff; border: none; border-radius: 10px; padding: 10px 18px; font: bold 15px inherit; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #4429b3; }
+    .error { color: #c62828; font-size: 13px; min-height: 18px; }
+    ul { list-style: none; }
+    .item { display: flex; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid #eee9fb; }
+    .item .name { flex: 1; font-weight: 600; }
+    .cat { font-size: 12px; background: #ece6ff; color: #5b3fd6; border-radius: 20px; padding: 2px 10px; }
+    .amount { font-weight: bold; }
+    .del { background: none; color: #c62828; padding: 4px 8px; font-size: 14px; }
+    .del:hover { background: #fde8e8; }
+    .row { margin-bottom: 14px; }
+    .row-top { display: flex; justify-content: space-between; font-size: 14px; margin-bottom: 4px; }
+    .track { background: #ece6ff; border-radius: 20px; height: 10px; overflow: hidden; }
+    .fill { height: 100%; background: linear-gradient(90deg, #5b3fd6, #b39cff); border-radius: 20px; transition: width 0.5s; }
+    @media (max-width: 800px) { main { grid-template-columns: 1fr; } form { grid-template-columns: 1fr; } .top { padding: 16px 20px 26px; } }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a href="index.html">&larr; Back to my portfolio</a>
+    <h1>SpendWise</h1>
+    <p>Demo project: a simple expense tracker for students.</p>
+  </header>
+
+  <main>
+    <div>
+      <div class="box">
+        <h2>Add an expense</h2>
+        <form id="expenseForm">
+          <input type="text" id="expName" placeholder="What did you buy?">
+          <select id="expCategory">
+            <option>Food</option>
+            <option>Transport</option>
+            <option>Data</option>
+            <option>Books</option>
+            <option>Other</option>
+          </select>
+          <input type="number" id="expAmount" placeholder="Amount" min="0">
+          <button type="submit">Add</button>
+        </form>
+        <p class="error" id="expError"></p>
+      </div>
+      <div class="box">
+        <h2>Recent expenses</h2>
+        <ul id="expenseList"></ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="box">
+        <h2>Total spent</h2>
+        <p class="total" id="totalText">0</p>
+      </div>
+      <div class="box">
+        <h2>By category</h2>
+        <div id="categoryBars"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // sample data so the page is not empty
+    let expenses = [
+      { name: "Lunch at the cafeteria", category: "Food", amount: 2500 },
+      { name: "Bus fare to campus", category: "Transport", amount: 1200 },
+      { name: "Monthly data bundle", category: "Data", amount: 5000 },
+      { name: "Programming textbook", category: "Books", amount: 7500 },
+      { name: "Snacks and water", category: "Food", amount: 1500 }
+    ];
+    const categories = ["Food", "Transport", "Data", "Books", "Other"];
+
+    const expenseList = document.getElementById("expenseList");
+    const totalText = document.getElementById("totalText");
+    const categoryBars = document.getElementById("categoryBars");
+
+    function money(n) {
+      return "₦" + n.toLocaleString("en-NG");
+    }
+
+    function showExpenses() {
+      expenseList.innerHTML = "";
+      let total = 0;
+
+      for (let i = 0; i < expenses.length; i++) {
+        total = total + expenses[i].amount;
+
+        const li = document.createElement("li");
+        li.className = "item";
+        li.innerHTML = '<span class="name"></span><span class="cat"></span><span class="amount"></span>';
+        li.querySelector(".name").textContent = expenses[i].name;
+        li.querySelector(".cat").textContent = expenses[i].category;
+        li.querySelector(".amount").textContent = money(expenses[i].amount);
+
+        const del = document.createElement("button");
+        del.className = "del";
+        del.textContent = "Delete";
+        del.addEventListener("click", function () {
+          expenses.splice(i, 1);
+          showExpenses();
+        });
+        li.appendChild(del);
+        expenseList.appendChild(li);
+      }
+
+      totalText.textContent = money(total);
+      showCategories(total);
+    }
+
+    // one bar for each category
+    function showCategories(total) {
+      categoryBars.innerHTML = "";
+      for (let c = 0; c < categories.length; c++) {
+        let sum = 0;
+        for (let i = 0; i < expenses.length; i++) {
+          if (expenses[i].category === categories[c]) {
+            sum = sum + expenses[i].amount;
+          }
+        }
+        let percent = 0;
+        if (total > 0) {
+          percent = Math.round((sum / total) * 100);
+        }
+        const row = document.createElement("div");
+        row.className = "row";
+        row.innerHTML = '<div class="row-top"><span>' + categories[c] + "</span><span>" + money(sum) +
+          '</span></div><div class="track"><div class="fill" style="width:' + percent + '%"></div></div>';
+        categoryBars.appendChild(row);
+      }
+    }
+
+    document.getElementById("expenseForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const name = document.getElementById("expName").value.trim();
+      const amount = Number(document.getElementById("expAmount").value);
+      const error = document.getElementById("expError");
+
+      if (name === "" || amount <= 0) {
+        error.textContent = "Please enter a name and an amount above 0.";
+        return;
+      }
+      error.textContent = "";
+      expenses.unshift({ name: name, category: document.getElementById("expCategory").value, amount: amount });
+      event.target.reset();
+      showExpenses();
+    });
+
+    showExpenses();
+  </script>
+</body>
+</html>

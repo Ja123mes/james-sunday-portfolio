@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Academic planner: add, complete and delete study tasks.">
+  <title>Planner | James Sunday</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html"><span class="logo-mark">JS</span> James Sunday</a>
+      <button class="nav-toggle" aria-label="Toggle navigation menu">&#9776;</button>
+      <nav id="nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="planner.html" class="active">Planner</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container page-head rise">
+      <p class="eyebrow">Academic planner</p>
+      <h1>Plan your studies, <span class="gradient-text">tick them off</span></h1>
+      <p class="lead">Add assignments, readings and deadlines. Mark a task as done when you finish it, or delete it. Your tasks are saved in this browser.</p>
+    </div>
+
+    <!-- ===== Planner tool ===== -->
+    <section class="section">
+      <div class="container">
+        <form id="taskForm" novalidate>
+          <div class="task-row">
+            <div>
+              <label for="taskInput">Task</label>
+              <input type="text" id="taskInput" placeholder="e.g. Finish COS 106 term project" maxlength="120" autocomplete="off">
+            </div>
+            <div>
+              <label for="taskDate">Due date</label>
+              <input type="date" id="taskDate">
+            </div>
+            <div>
+              <label for="taskPriority">Priority</label>
+              <select id="taskPriority">
+                <option value="low">Low</option>
+                <option value="medium" selected>Medium</option>
+                <option value="high">High</option>
+              </select>
+            </div>
+            <button type="submit" class="btn">Add task</button>
+          </div>
+          <span id="taskError" class="error" role="alert"></span>
+        </form>
+
+        <div class="progress-wrap">
+          <div class="progress-top"><span id="taskCounter"></span><span id="progressText">0% complete</span></div>
+          <div class="progress"><div id="progressBar"></div></div>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter tasks">
+          <button type="button" data-filter="all" class="active">All</button>
+          <button type="button" data-filter="active">Active</button>
+          <button type="button" data-filter="completed">Completed</button>
+          <button type="button" id="clearButton" class="clear">Clear completed</button>
+        </div>
+
+        <ul id="taskList"></ul>
+      </div>
+    </section>
+
+    <!-- ===== Sample week ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Need inspiration?</p>
+        <h2>A sample study week</h2>
+        <p class="lead">This is the kind of timetable I use to stay on track. Copy the ideas into the planner above.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Day</th><th scope="col">Morning</th><th scope="col">Afternoon</th><th scope="col">Evening</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Monday</td><td>Lecture notes</td><td>Programming practice</td><td>Revision</td></tr>
+              <tr><td>Tuesday</td><td>Online class</td><td>Assignment work</td><td>Free time</td></tr>
+              <tr><td>Wednesday</td><td>Reading</td><td>Project work</td><td>Study group</td></tr>
+              <tr><td>Thursday</td><td>Online class</td><td>Coding practice</td><td>Review notes</td></tr>
+              <tr><td>Friday</td><td>Assignment work</td><td>Weekly review</td><td>Rest</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tips ===== -->
+    <section class="section">
+      <div class="container">
+        <p class="eyebrow">Study tips</p>
+        <h2>Make the planner work for you</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <div class="icon">1</div>
+            <h3>Be specific</h3>
+            <p>&quot;Read chapter 3&quot; is better than &quot;study&quot;. A clear task is easier to start.</p>
+          </div>
+          <div class="card">
+            <div class="icon">2</div>
+            <h3>Use priorities</h3>
+            <p>Mark urgent deadlines as high priority so you see them first.</p>
+          </div>
+          <div class="card">
+            <div class="icon">3</div>
+            <h3>Review weekly</h3>
+            <p>Clear completed tasks every Friday and plan the week ahead.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:36px;">How the colours work</h3>
+        <ul class="styled">
+          <li>A red edge means high priority.</li>
+          <li>A purple edge means medium priority.</li>
+          <li>A green edge means low priority.</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>James Sunday</h3>
+        <p>Student portfolio built for COS 106 at MIVA Open University.</p>
+      </div>
+      <div>
+        <h3>Pages</h3>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="planner.html">Planner</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:j.adewole0437@miva.edu.ng">j.adewole0437@miva.edu.ng</a>
+      </div>
+    </div>
+    <div class="copyright"><p>&copy; <span id="year">2026</span> James Sunday. COS 106 Term Project.</p></div>
+  </footer>
+
+  <audio id="ambient" loop preload="none">
+    <source src="ambient.wav" type="audio/wav">
+  </audio>
+  <button id="soundButton" class="sound-btn" type="button">Sound: Off</button>
+  <script src="script.js"></script>
+</body>
+</html>

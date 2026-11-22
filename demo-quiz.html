@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Basics Quiz | Demo</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Georgia, "Times New Roman", serif; background: #fff4cc; color: #2d2410; min-height: 100vh; }
+    .bar { background: #2d2410; color: #fff4cc; padding: 10px 40px; font: 14px Arial, sans-serif; }
+    .bar a { color: #fff4cc; text-decoration: none; }
+    header { text-align: center; padding: 34px 20px 10px; }
+    header h1 { font-size: 40px; }
+    header p { font-family: Arial, sans-serif; color: #7a6628; margin-top: 4px; }
+    .quiz { max-width: 680px; margin: 22px auto 50px; background: #fffdf5; border: 3px solid #2d2410; border-radius: 22px; padding: 30px; box-shadow: 8px 8px 0 #f2b705; }
+    .meta { display: flex; justify-content: space-between; font: bold 14px Arial, sans-serif; color: #7a6628; margin-bottom: 8px; }
+    .track { height: 12px; background: #f1e3a6; border-radius: 20px; overflow: hidden; margin-bottom: 22px; }
+    #progress { height: 100%; width: 0; background: #f2b705; transition: width 0.4s; }
+    h2 { font-size: 26px; margin-bottom: 18px; line-height: 1.3; }
+    .option { display: block; width: 100%; text-align: left; background: #fff; border: 2px solid #2d2410; border-radius: 12px; padding: 13px 16px; margin-bottom: 10px; font: 17px Arial, sans-serif; color: #2d2410; cursor: pointer; transition: transform 0.2s, background 0.2s; }
+    .option:hover:not(:disabled) { transform: translateX(6px); background: #fff4cc; }
+    .option.right { background: #c8f0cf; border-color: #1f7a33; }
+    .option.wrong { background: #ffd0d0; border-color: #b00020; }
+    .feedback { font: bold 16px Arial, sans-serif; min-height: 24px; margin: 8px 0 14px; }
+    .next { background: #2d2410; color: #fff4cc; border: none; border-radius: 30px; padding: 11px 28px; font: bold 16px Arial, sans-serif; cursor: pointer; display: none; }
+    .next:hover { background: #4a3a14; }
+    .result { text-align: center; display: none; }
+    .result .big { font-size: 64px; font-weight: bold; color: #c98f00; }
+  </style>
+</head>
+<body>
+  <div class="bar"><a href="index.html">&larr; Back to my portfolio</a> &nbsp;|&nbsp; Demo project: Web Basics Quiz</div>
+  <header>
+    <h1>Web Basics Quiz</h1>
+    <p>Five quick questions about HTML, CSS and JavaScript</p>
+  </header>
+
+  <section class="quiz">
+    <div id="quizBox">
+      <div class="meta"><span id="qNumber"></span><span id="scoreText"></span></div>
+      <div class="track"><div id="progress"></div></div>
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <p class="feedback" id="feedback"></p>
+      <button class="next" id="nextButton" type="button">Next question</button>
+    </div>
+    <div class="result" id="resultBox">
+      <h2>Quiz complete!</h2>
+      <p class="big" id="finalScore"></p>
+      <p id="finalMessage" style="margin:10px 0 20px; font-family: Arial, sans-serif;"></p>
+      <button class="next" id="restartButton" type="button" style="display:inline-block;">Try again</button>
+    </div>
+  </section>
+
+  <script>
+    // each question is an object stored in an array
+    const questions = [
+      { text: "Which tag creates the biggest heading in HTML?", options: ["<h6>", "<h1>", "<head>", "<title>"], answer: 1 },
+      { text: "Which CSS property changes the text colour?", options: ["font-style", "text-align", "color", "background"], answer: 2 },
+      { text: "Which symbol is used for comments in JavaScript?", options: ["//", "##", "<!-- -->", "**"], answer: 0 },
+      { text: "Which method adds an item to the end of an array?", options: ["pop()", "push()", "shift()", "slice()"], answer: 1 },
+      { text: "What does CSS Flexbox help you do?", options: ["Store data", "Send emails", "Arrange items in a row or column", "Validate forms"], answer: 2 }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let answered = false;
+
+    const optionsDiv = document.getElementById("options");
+    const feedback = document.getElementById("feedback");
+    const nextButton = document.getElementById("nextButton");
+
+    function showQuestion() {
+      const q = questions[current];
+      answered = false;
+      document.getElementById("qNumber").textContent = "Question " + (current + 1) + " of " + questions.length;
+      document.getElementById("scoreText").textContent = "Score: " + score;
+      document.getElementById("progress").style.width = (current / questions.length) * 100 + "%";
+      document.getElementById("question").textContent = q.text;
+      feedback.textContent = "";
+      nextButton.style.display = "none";
+      optionsDiv.innerHTML = "";
+
+      for (let i = 0; i < q.options.length; i++) {
+        const button = document.createElement("button");
+        button.className = "option";
+        button.type = "button";
+        button.textContent = q.options[i];
+        button.addEventListener("click", function () {
+          chooseAnswer(i);
+        });
+        optionsDiv.appendChild(button);
+      }
+    }
+
+    function chooseAnswer(index) {
+      if (answered) {
+        return;
+      }
+      answered = true;
+      const q = questions[current];
+      const buttons = optionsDiv.querySelectorAll(".option");
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].disabled = true;
+      }
+      buttons[q.answer].classList.add("right");
+
+      if (index === q.answer) {
+        score++;
+        feedback.textContent = "Correct! Well done.";
+      } else {
+        buttons[index].classList.add("wrong");
+        feedback.textContent = "Not quite. The correct answer is highlighted.";
+      }
+
+      document.getElementById("scoreText").textContent = "Score: " + score;
+      nextButton.style.display = "inline-block";
+      nextButton.textContent = current === questions.length - 1 ? "See my result" : "Next question";
+    }
+
+    nextButton.addEventListener("click", function () {
+      current++;
+      if (current < questions.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    });
+
+    function showResult() {
+      document.getElementById("quizBox").style.display = "none";
+      document.getElementById("resultBox").style.display = "block";
+      document.getElementById("finalScore").textContent = score + " / " + questions.length;
+
+      let message = "Keep practising, you will get there!";
+      if (score === questions.length) {
+        message = "Perfect score! Excellent work.";
+      } else if (score >= 3) {
+        message = "Good job! You know your web basics.";
+      }
+      document.getElementById("finalMessage").textContent = message;
+    }
+
+    document.getElementById("restartButton").addEventListener("click", function () {
+      current = 0;
+      score = 0;
+      document.getElementById("resultBox").style.display = "none";
+      document.getElementById("quizBox").style.display = "block";
+      showQuestion();
+    });
+
+    showQuestion();
+  </script>
+</body>
+</html>
